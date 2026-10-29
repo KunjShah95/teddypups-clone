@@ -227,6 +227,15 @@ html[data-pup] .pup-stop>.pup-buddy{visibility:hidden}
 
 .pup-buddy>svg{width:100%;height:auto;display:block}
 
+/* BasketFront/BasketBack (components/art.tsx) draw the basket centred on
+   x=212 of their 300-wide viewBox, not x=150 -- the Pup artwork's own
+   centreline. Without this shift the "curl" pose sits beside the basket
+   instead of inside it. 62/300 lines the two centrelines up so the body
+   tucks behind the front trough and only the head pops over the rim. */
+.tp-basket__pup .pup-buddy {
+  translate: 20.7% 0;
+}
+
 /* Teddy's idle life: gentle breathing, a periodic blink, a waving paw and a
    slow-floating heart. The classes exist on components/pup.tsx already; this
    is the animation wiring that was never written, so the mascot sat frozen
