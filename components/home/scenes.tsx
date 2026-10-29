@@ -339,7 +339,15 @@ export function HomeScene() {
         <span aria-hidden="true" className="tp-house__plant tp-house__plant--left" />
         <span aria-hidden="true" className="tp-house__lamp" />
         <div className="tp-house__doorway">
-          <span className="tp-house__inside" />
+          <span className="tp-house__inside">
+            <Image
+              src="/media/FHyoHcIosLZE/60f6e7e00a/27b888_323008bb0f6a41d4bde2a0da7206cd98f000.jpg"
+              alt="A puppy held up at the open door, ready to come home"
+              fill
+              sizes="12rem"
+              style={{ objectFit: "cover" }}
+            />
+          </span>
           <span aria-hidden="true" className="tp-house__door">
             <span className="tp-house__peep" />
             <span className="tp-house__knob" />
