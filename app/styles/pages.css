@@ -1,0 +1,544 @@
+/* ============================================================
+   Inner pages — gallery, facts, enquiry, shared bits
+   ============================================================ */
+.storywrap {
+  position: relative;
+  padding-block: clamp(2rem, 5vh, 3.25rem) clamp(4rem, 9vh, 6rem);
+}
+
+/* ---------- gallery ---------- */
+.gal {
+  position: relative;
+}
+
+.gal__frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 3px solid var(--color-cocoa);
+  border-radius: 1.4rem;
+  background: var(--color-honey-soft);
+  box-shadow:
+    7px 7px 0 -2px var(--color-milk),
+    7px 7px 0 1px var(--color-cocoa),
+    14px 14px 0 -2px var(--color-milk),
+    14px 14px 0 1px var(--color-cocoa);
+}
+
+@media (min-width: 768px) {
+  .gal__frame {
+    aspect-ratio: 5 / 6;
+  }
+}
+
+.gal__frame img,
+.gal__frame video {
+  object-fit: cover;
+}
+
+.gal__label {
+  position: absolute;
+  top: -0.85rem;
+  left: 1.4rem;
+  z-index: 4;
+  padding: 0.2rem 0.85rem 0.3rem;
+  border: 2px solid var(--color-cocoa);
+  border-radius: 999px;
+  background: var(--color-milk);
+  font-size: 1.05rem;
+  rotate: -2.4deg;
+  box-shadow: 2px 3px rgba(42, 23, 14, 0.2);
+}
+
+.gal__bars {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.gal__dots {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.gal__dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 2px solid var(--color-cocoa);
+  border-radius: 50%;
+  background: transparent;
+  transition:
+    background-color 0.2s ease,
+    scale 0.25s var(--ease-pounce);
+}
+
+.gal__dot[aria-current="true"] {
+  background: var(--color-cocoa);
+  scale: 1.15;
+}
+
+.gal__count {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.gal__step {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 2.5px solid var(--color-cocoa);
+  border-radius: 999px;
+  background: var(--color-milk);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.gal__step:hover {
+  background: var(--color-cocoa);
+  color: var(--color-milk);
+}
+
+.gal__step:disabled {
+  opacity: 0.35;
+}
+
+/* ---------- facts card ---------- */
+.facts {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 1.15rem;
+  padding-top: 1.05rem;
+  border-top: 2px dashed rgba(42, 23, 14, 0.25);
+}
+
+.facts > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.95rem;
+}
+
+.facts dt {
+  color: var(--color-cocoa-soft);
+}
+
+.facts dd {
+  font-weight: 650;
+  text-align: right;
+}
+
+/* ---------- checklist ---------- */
+.checks {
+  display: grid;
+  gap: 0.85rem 1.5rem;
+}
+
+@media (min-width: 720px) {
+  .checks {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.checks li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.6rem;
+  align-items: start;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.checks svg {
+  margin-top: 0.12rem;
+  color: var(--color-toffee-deep);
+}
+
+/* ---------- prev / next ---------- */
+.pager {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+}
+
+@media (min-width: 640px) {
+  .pager {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.pager a {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1rem 1.15rem;
+  border: 2.5px solid var(--color-cocoa);
+  border-radius: 1.1rem;
+  background: var(--color-milk);
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    translate 0.3s var(--ease-pounce);
+}
+
+.pager a:hover {
+  background: var(--color-honey-soft);
+  translate: 0 -2px;
+}
+
+.pager small {
+  color: var(--color-cocoa-soft);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.pager b {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.pager a:last-child {
+  text-align: right;
+}
+
+/* ---------- enquiry form ---------- */
+.enq {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 560px) {
+  .enq__two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
+.enq__field {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.enq__label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.enq__label em {
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.enq__input,
+.enq__area {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border: 2px solid rgba(42, 23, 14, 0.32);
+  border-radius: 0.7rem;
+  background: #fffdf8;
+  color: var(--color-cocoa);
+  font: inherit;
+  font-size: 0.98rem;
+}
+
+.enq__area {
+  min-height: 6rem;
+  resize: vertical;
+  font-family: var(--font-hand);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  background-image: repeating-linear-gradient(#0000 0 calc(1.9rem - 1px), rgba(42, 23, 14, 0.16) 0 1.9rem);
+}
+
+.enq__input:focus-visible,
+.enq__area:focus-visible {
+  border-color: var(--color-toffee-deep);
+  box-shadow: 0 0 0 3px rgba(194, 98, 43, 0.2);
+  outline: none;
+}
+
+.enq__err {
+  color: #b3261e;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.enq__done {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: start;
+  padding: 1.5rem;
+  border: 2.5px dashed var(--color-cocoa);
+  border-radius: 1.1rem;
+  background: var(--color-honey-soft);
+}
+
+.enq__honey {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Marginalia sits back so the portrait leads. */
+.tp-sketch__doodle {
+  color: var(--color-toffee);
+  opacity: 0.4;
+}
+
+
+/* A strip of tape holding the card to the page. */
+.pup-card__tape {
+  position: absolute;
+  top: -0.85rem;
+  left: 50%;
+  width: 5.5rem;
+  height: 1.5rem;
+  translate: -50% 0;
+  rotate: -3deg;
+  background: rgba(246, 214, 160, 0.9);
+  box-shadow: 0 1px 2px rgba(42, 23, 14, 0.18);
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .pup-card__tape {
+    width: 4.25rem;
+    height: 1.15rem;
+  }
+}
+
+
+/* ============================================================
+   Happy families — polaroid wall + lightbox
+   ============================================================ */
+.tp-wall .tp-polaroid__photo {
+  aspect-ratio: 4 / 4.6;
+}
+
+.tp-wall .tp-polaroid__photo img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+.fam-dialog {
+  width: min(46rem, 92vw);
+  max-width: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-cocoa);
+}
+
+.fam-dialog::backdrop {
+  background: rgba(42, 23, 14, 0.72);
+  backdrop-filter: blur(2px);
+}
+
+.fam-dialog__card {
+  position: relative;
+  padding: 0.9rem 0.9rem 0;
+  border: 3px solid var(--color-cocoa);
+  border-radius: 0.4rem;
+  background: #fffefb;
+  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.55);
+}
+
+.fam-dialog__photo {
+  position: relative;
+  aspect-ratio: 4 / 3.4;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--color-honey-soft);
+}
+
+.fam-dialog__photo img {
+  object-fit: cover;
+}
+
+.fam-dialog__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 0.35rem 0.95rem;
+}
+
+.fam-dialog__caption {
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+.fam-dialog__nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.fam-dialog__btn {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 2.5px solid var(--color-cocoa);
+  border-radius: 999px;
+  background: var(--color-milk);
+  font-size: 1.1rem;
+  line-height: 1;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.fam-dialog__btn:hover {
+  background: var(--color-cocoa);
+  color: var(--color-milk);
+}
+
+.fam-dialog__close {
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  z-index: 2;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 3px solid var(--color-cocoa);
+  border-radius: 999px;
+  background: var(--color-honey);
+  font-size: 1.15rem;
+  line-height: 1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.28);
+}
+
+/* ============================================================
+   Contact — letter blanks and the visit card
+   ============================================================ */
+.letter__fineprint {
+  max-width: 46ch;
+  color: var(--color-cocoa-soft);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.contact__info {
+  display: grid;
+  gap: 1.1rem;
+  justify-items: start;
+}
+
+/* ============================================================
+   Gone home — the booth
+   ============================================================ */
+.gone__strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* ============================================================
+   Shared page head
+   ============================================================ */
+.headline {
+  display: grid;
+  gap: 1.5rem 2.5rem;
+  align-items: end;
+}
+
+@media (min-width: 900px) {
+  .headline--split {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 26rem);
+  }
+}
+
+/* ============================================================
+   Contact — letter blanks, honeypot, and the visit card
+   ============================================================ */
+/* The honeypot is real in the DOM for bots, invisible to people. */
+.tp-letterform__honey {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tp-letterform .tp-blank input,
+.tp-letterform .tp-blank select {
+  min-width: 0;
+}
+
+.contact__grid {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+@media (min-width: 900px) {
+  .contact__grid {
+    grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.contact__block h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.contact__block a {
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.contact__block {
+  display: grid;
+  justify-items: start;
+}
+
+.contact__info .btn {
+  max-width: 100%;
+  text-align: left;
+}
+
+/* The postcard plane needs a little air; the journeys block needs less. */
+.tp-flight__body {
+  fill: var(--color-milk);
+  stroke: var(--color-cocoa);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.tp-journeys {
+  margin-top: clamp(2.25rem, 4.5vw, 3.75rem);
+}

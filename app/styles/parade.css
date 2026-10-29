@@ -1,0 +1,297 @@
+/* ============================================================
+   Meet the pups — the parade
+   A slow, continuous drift of portrait cards. Pauses on hover,
+   focus, or via the control so nothing moves without consent.
+   ============================================================ */
+.parade {
+  --card: clamp(13.5rem, 20vw, 18rem);
+  --gap: clamp(0.9rem, 1.3vw, 1.35rem);
+  position: relative;
+  margin-top: clamp(2rem, 4.5vh, 3rem);
+}
+
+.parade__viewport {
+  overflow: hidden;
+  padding-block: 0.85rem 1.9rem;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+
+.parade__track {
+  display: flex;
+  width: max-content;
+  animation: parade-drift 78s linear infinite;
+  will-change: transform;
+}
+
+/* Two identical halves, each padded by exactly one gap, so -50% loops clean. */
+.parade__group {
+  display: flex;
+  gap: var(--gap);
+  padding-right: var(--gap);
+}
+
+.parade[data-paused="true"] .parade__track,
+.parade:hover .parade__track,
+.parade:focus-within .parade__track {
+  animation-play-state: paused;
+}
+
+@keyframes parade-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parade__track {
+    animation: none;
+  }
+  .parade__viewport {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(42, 23, 14, 0.3) transparent;
+  }
+}
+
+/* ---------- card ---------- */
+.pup-card {
+  position: relative;
+  flex: none;
+  width: var(--card);
+}
+
+.pup-card__open {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.pup-card__frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 3px solid var(--color-cocoa);
+  border-radius: 1.75rem;
+  background: var(--color-honey-soft);
+  box-shadow: 6px 8px 0 rgba(42, 23, 14, 0.09);
+  transition:
+    transform 0.45s var(--ease-pounce),
+    box-shadow 0.45s var(--ease-silk);
+}
+
+.pup-card__open:hover .pup-card__frame,
+.pup-card__open:focus-visible .pup-card__frame {
+  transform: translateY(-7px);
+  box-shadow: 11px 17px 0 rgba(42, 23, 14, 0.13);
+}
+
+.pup-card__photo {
+  position: absolute;
+  inset: 0;
+}
+
+.pup-card__photo img {
+  object-fit: cover;
+  transition: scale 0.7s var(--ease-silk);
+}
+
+.pup-card__open:hover .pup-card__photo img {
+  scale: 1.05;
+}
+
+.pup-card__tag,
+.pup-card__video {
+  position: absolute;
+  top: 0.7rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.28rem 0.6rem;
+  border: 2px solid var(--color-cocoa);
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.pup-card__tag {
+  left: 0.7rem;
+  background: var(--color-honey);
+  color: var(--color-cocoa);
+}
+
+.pup-card__video {
+  right: 0.7rem;
+  background: rgba(42, 23, 14, 0.82);
+  color: var(--color-milk);
+  letter-spacing: 0.06em;
+}
+
+.pup-card__plate {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 1;
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.8rem 6.4rem 0.95rem 0.95rem;
+  border-top: 3px solid var(--color-cocoa);
+  background: color-mix(in srgb, var(--color-milk) 95%, transparent);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.pup-card__name {
+  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+  line-height: 1;
+}
+
+.pup-card__meta {
+  overflow: hidden;
+  color: var(--color-cocoa-soft);
+  font-size: 0.78rem;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pup-card__reserve {
+  position: absolute;
+  right: 0.7rem;
+  bottom: 0.8rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-height: 2.15rem;
+  padding: 0 0.85rem;
+  border: 2px solid var(--color-cocoa);
+  border-radius: 999px;
+  background: var(--color-toffee-deep);
+  color: var(--color-milk);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    translate 0.35s var(--ease-pounce);
+}
+
+.pup-card__reserve:hover {
+  background: var(--color-cocoa);
+  translate: 0 -2px;
+}
+
+/* ---------- header ---------- */
+.meet-head {
+  display: grid;
+  align-items: end;
+  gap: 1.75rem;
+}
+
+@media (min-width: 900px) {
+  .meet-head {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2.5rem;
+  }
+}
+
+.meet-head__aside {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.meet-count {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+}
+
+.meet-count__n {
+  color: var(--color-toffee-deep);
+  font-size: clamp(2.6rem, 4vw, 3.6rem);
+  line-height: 0.78;
+}
+
+.meet-count__l {
+  max-width: 8.5ch;
+  color: var(--ink-soft);
+  font-size: 0.7rem;
+  font-weight: 650;
+  letter-spacing: 0.15em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.meet-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.4rem;
+  margin-top: 1.15rem;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.meet-trust li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.meet-trust svg {
+  flex: none;
+  color: var(--color-toffee-deep);
+}
+
+/* ---------- pause control ---------- */
+.parade__control {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding-inline: var(--gutter);
+}
+
+.parade__pause {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.25rem;
+  padding: 0 0.85rem;
+  border: 2px solid rgba(42, 23, 14, 0.28);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 650;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.parade__pause:hover {
+  border-color: var(--color-cocoa);
+  color: var(--color-cocoa);
+}
+
+.parade__hint {
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+}
+
+@media (max-width: 640px) {
+  .parade__hint {
+    display: none;
+  }
+}

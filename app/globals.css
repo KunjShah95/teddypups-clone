@@ -1,26 +1,158 @@
 @import "tailwindcss";
+@import "./styles/reference.css";
+@import "./styles/parade.css";
+@import "./styles/reserve.css";
+@import "./styles/pages.css";
+
+/* ============================================================
+   Design tokens
+   ------------------------------------------------------------
+   Pulled from the reference build's compiled stylesheet so the
+   palette, easing curves and type stacks are identical.
+   ============================================================ */
+@theme {
+  --color-toffee: #c2622b;
+  --color-toffee-deep: #a24a1a;
+  --color-toffee-ink: #8e3f15;
+  --color-honey: #f2be6b;
+  --color-honey-soft: #fbe3b4;
+  --color-cocoa: #2a170e;
+  --color-cocoa-soft: #5a3a28;
+  --color-milk: #fffdf8;
+  --color-sky: #bfddf5;
+  --color-sky-deep: #2f6e9e;
+  --color-blush: #f9cdbf;
+
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-hand: var(--font-shantell), ui-rounded, "Comic Sans MS", cursive;
+
+  --ease-pounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-silk: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-snap: cubic-bezier(0.7, 0, 0.2, 1);
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+  --header-h: 4.75rem;
+  --bar-h: 0px;
+  --ink: var(--color-cocoa);
+  --ink-soft: var(--color-cocoa-soft);
+  accent-color: var(--color-toffee-deep);
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@media (max-width: 767px) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --header-h: 4rem;
+    --bar-h: calc(4rem + env(safe-area-inset-bottom));
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  html {
+    scrollbar-gutter: stable;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+  }
+  body {
+    min-height: 100dvh;
+    background: var(--color-milk);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-honey);
+    color: var(--color-cocoa);
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-toffee-deep);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  img,
+  video {
+    max-width: 100%;
+  }
+  a {
+    color: inherit;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+}
+
+/* ============================================================
+   Type helpers. These live in the utility layer, exactly where the
+   reference build put them, so cascade order matches.
+   ============================================================ */
+@layer utilities {
+  .gutter {
+    padding-inline: var(--gutter);
+  }
+  .text-lede {
+    font-size: clamp(1.125rem, 1.4vw, 1.375rem);
+    line-height: 1.5;
+  }
+  .font-plush {
+    text-wrap: balance;
+    font-family: var(--font-display);
+    font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144;
+    letter-spacing: -0.025em;
+    font-weight: 800;
+    line-height: 0.92;
+  }
+  .font-plush-text {
+    font-family: var(--font-display);
+    font-variation-settings: "SOFT" 100, "WONK" 0, "opsz" 36;
+  }
+  .font-scrawl {
+    font-family: var(--font-hand);
+    font-variation-settings: "INFM" 60, "BNCE" 30;
+    letter-spacing: 0;
+    font-weight: 500;
+  }
+  .text-giant {
+    font-size: clamp(3.1rem, 9.4vw, 9.75rem);
+  }
+  .text-huge {
+    font-size: clamp(2.6rem, 6.4vw, 6.25rem);
+  }
+  .text-big {
+    font-size: clamp(2rem, 4.2vw, 4rem);
+  }
+}
+
+@layer components {
+  /* Utility shapes used throughout the marketing pages */
+  .tp-shell {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  .tp-shell--wide {
+    max-width: 90rem;
+  }
+  .tp-section {
+    padding-block: clamp(3.5rem, 9vw, 7.5rem);
+  }
+  .tp-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
 }
