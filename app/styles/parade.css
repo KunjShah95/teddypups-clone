@@ -71,6 +71,9 @@
 }
 
 .pup-card__frame {
+  /* aspect-ratio has no effect on inline elements (this is a <span>), so
+     the frame collapsed to near-zero height without this. */
+  display: block;
   position: relative;
   aspect-ratio: 4 / 5;
   overflow: hidden;
@@ -141,7 +144,9 @@
   z-index: 1;
   display: grid;
   gap: 0.1rem;
-  padding: 0.8rem 6.4rem 0.95rem 0.95rem;
+  /* Bottom padding (not right padding) clears the Reserve pill, so the
+     name/meta text can use the card's full width instead of truncating. */
+  padding: 0.8rem 0.95rem clamp(2.9rem, 6vw, 3.3rem) 0.95rem;
   border-top: 3px solid var(--color-cocoa);
   background: color-mix(in srgb, var(--color-milk) 95%, transparent);
   -webkit-backdrop-filter: blur(8px);
@@ -154,12 +159,14 @@
 }
 
 .pup-card__meta {
+  display: -webkit-box;
   overflow: hidden;
   color: var(--color-cocoa-soft);
   font-size: 0.78rem;
   line-height: 1.3;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .pup-card__reserve {
